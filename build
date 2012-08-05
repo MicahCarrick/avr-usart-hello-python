@@ -1,0 +1,5 @@
+#!/usr/bin/sh
+
+avr-gcc -std=gnu99 -mmcu=atmega8 -Os -Wall -Wl,-Map,main.map -o main.elf main.c
+avr-objdump -h -S main.elf > main.lst
+avr-objcopy -j .text -j .data -O ihex main.elf main.hex

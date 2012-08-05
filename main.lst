@@ -1,0 +1,128 @@
+
+main.elf:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .text         000000ba  00000000  00000000  00000054  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  1 .stab         00000834  00000000  00000000  00000110  2**2
+                  CONTENTS, READONLY, DEBUGGING
+  2 .stabstr      000000c5  00000000  00000000  00000944  2**0
+                  CONTENTS, READONLY, DEBUGGING
+
+Disassembly of section .text:
+
+00000000 <__vectors>:
+   0:	19 c0       	rjmp	.+50     	; 0x34 <__ctors_end>
+   2:	33 c0       	rjmp	.+102    	; 0x6a <__bad_interrupt>
+   4:	32 c0       	rjmp	.+100    	; 0x6a <__bad_interrupt>
+   6:	31 c0       	rjmp	.+98     	; 0x6a <__bad_interrupt>
+   8:	30 c0       	rjmp	.+96     	; 0x6a <__bad_interrupt>
+   a:	2f c0       	rjmp	.+94     	; 0x6a <__bad_interrupt>
+   c:	2e c0       	rjmp	.+92     	; 0x6a <__bad_interrupt>
+   e:	2d c0       	rjmp	.+90     	; 0x6a <__bad_interrupt>
+  10:	2c c0       	rjmp	.+88     	; 0x6a <__bad_interrupt>
+  12:	2b c0       	rjmp	.+86     	; 0x6a <__bad_interrupt>
+  14:	2a c0       	rjmp	.+84     	; 0x6a <__bad_interrupt>
+  16:	29 c0       	rjmp	.+82     	; 0x6a <__bad_interrupt>
+  18:	28 c0       	rjmp	.+80     	; 0x6a <__bad_interrupt>
+  1a:	27 c0       	rjmp	.+78     	; 0x6a <__bad_interrupt>
+  1c:	26 c0       	rjmp	.+76     	; 0x6a <__bad_interrupt>
+  1e:	25 c0       	rjmp	.+74     	; 0x6a <__bad_interrupt>
+  20:	24 c0       	rjmp	.+72     	; 0x6a <__bad_interrupt>
+  22:	23 c0       	rjmp	.+70     	; 0x6a <__bad_interrupt>
+  24:	22 c0       	rjmp	.+68     	; 0x6a <__bad_interrupt>
+
+00000026 <__c.1435>:
+  26:	48 65 6c 6c 6f 20 50 79 74 68 6f 6e 21 00           Hello Python!.
+
+00000034 <__ctors_end>:
+  34:	11 24       	eor	r1, r1
+  36:	1f be       	out	0x3f, r1	; 63
+  38:	cf e5       	ldi	r28, 0x5F	; 95
+  3a:	d4 e0       	ldi	r29, 0x04	; 4
+  3c:	de bf       	out	0x3e, r29	; 62
+  3e:	cd bf       	out	0x3d, r28	; 61
+
+00000040 <__do_copy_data>:
+  40:	10 e0       	ldi	r17, 0x00	; 0
+  42:	a0 e6       	ldi	r26, 0x60	; 96
+  44:	b0 e0       	ldi	r27, 0x00	; 0
+  46:	ea eb       	ldi	r30, 0xBA	; 186
+  48:	f0 e0       	ldi	r31, 0x00	; 0
+  4a:	02 c0       	rjmp	.+4      	; 0x50 <__do_copy_data+0x10>
+  4c:	05 90       	lpm	r0, Z+
+  4e:	0d 92       	st	X+, r0
+  50:	a0 36       	cpi	r26, 0x60	; 96
+  52:	b1 07       	cpc	r27, r17
+  54:	d9 f7       	brne	.-10     	; 0x4c <__do_copy_data+0xc>
+
+00000056 <__do_clear_bss>:
+  56:	10 e0       	ldi	r17, 0x00	; 0
+  58:	a0 e6       	ldi	r26, 0x60	; 96
+  5a:	b0 e0       	ldi	r27, 0x00	; 0
+  5c:	01 c0       	rjmp	.+2      	; 0x60 <.do_clear_bss_start>
+
+0000005e <.do_clear_bss_loop>:
+  5e:	1d 92       	st	X+, r1
+
+00000060 <.do_clear_bss_start>:
+  60:	a0 36       	cpi	r26, 0x60	; 96
+  62:	b1 07       	cpc	r27, r17
+  64:	e1 f7       	brne	.-8      	; 0x5e <.do_clear_bss_loop>
+  66:	1a d0       	rcall	.+52     	; 0x9c <main>
+  68:	26 c0       	rjmp	.+76     	; 0xb6 <_exit>
+
+0000006a <__bad_interrupt>:
+  6a:	ca cf       	rjmp	.-108    	; 0x0 <__vectors>
+
+0000006c <USART_get_char>:
+  6c:	5f 9b       	sbis	0x0b, 7	; 11
+  6e:	fe cf       	rjmp	.-4      	; 0x6c <USART_get_char>
+  70:	8c b1       	in	r24, 0x0c	; 12
+  72:	08 95       	ret
+
+00000074 <USART_send_char>:
+  74:	5d 9b       	sbis	0x0b, 5	; 11
+  76:	fe cf       	rjmp	.-4      	; 0x74 <USART_send_char>
+  78:	8c b9       	out	0x0c, r24	; 12
+  7a:	08 95       	ret
+
+0000007c <USART_send_str_P>:
+  7c:	cf 93       	push	r28
+  7e:	df 93       	push	r29
+  80:	ec 01       	movw	r28, r24
+  82:	04 c0       	rjmp	.+8      	; 0x8c <USART_send_str_P+0x10>
+  84:	21 96       	adiw	r28, 0x01	; 1
+  86:	fc 01       	movw	r30, r24
+  88:	84 91       	lpm	r24, Z
+  8a:	f4 df       	rcall	.-24     	; 0x74 <USART_send_char>
+  8c:	ce 01       	movw	r24, r28
+  8e:	fe 01       	movw	r30, r28
+  90:	24 91       	lpm	r18, Z
+  92:	22 23       	and	r18, r18
+  94:	b9 f7       	brne	.-18     	; 0x84 <USART_send_str_P+0x8>
+  96:	df 91       	pop	r29
+  98:	cf 91       	pop	r28
+  9a:	08 95       	ret
+
+0000009c <main>:
+  9c:	10 bc       	out	0x20, r1	; 32
+  9e:	83 e3       	ldi	r24, 0x33	; 51
+  a0:	89 b9       	out	0x09, r24	; 9
+  a2:	59 98       	cbi	0x0b, 1	; 11
+  a4:	88 e1       	ldi	r24, 0x18	; 24
+  a6:	8a b9       	out	0x0a, r24	; 10
+  a8:	e1 df       	rcall	.-62     	; 0x6c <USART_get_char>
+  aa:	81 30       	cpi	r24, 0x01	; 1
+  ac:	e9 f7       	brne	.-6      	; 0xa8 <main+0xc>
+  ae:	86 e2       	ldi	r24, 0x26	; 38
+  b0:	90 e0       	ldi	r25, 0x00	; 0
+  b2:	e4 df       	rcall	.-56     	; 0x7c <USART_send_str_P>
+  b4:	f9 cf       	rjmp	.-14     	; 0xa8 <main+0xc>
+
+000000b6 <_exit>:
+  b6:	f8 94       	cli
+
+000000b8 <__stop_program>:
+  b8:	ff cf       	rjmp	.-2      	; 0xb8 <__stop_program>
