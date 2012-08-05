@@ -16,7 +16,7 @@ The `hello.py` Python script can then send a command, `0x01`, for which the AVR
 will respond with the string "Hello Python!".
 
 
-        [micah@octopus usart_hello_python]$ ./hello.py
+        [micah@octopus avr-usart-hello-python]$ ./hello.py
         AVR Said: "Hello Python!"
         0x48 0x65 0x6c 0x6c 0x6f 0x20 0x50 0x79 0x74 0x68 0x6f 0x6e 0x21
         
